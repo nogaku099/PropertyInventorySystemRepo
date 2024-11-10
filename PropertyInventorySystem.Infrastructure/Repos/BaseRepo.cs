@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PropertyInventorySystem.Infrastructure.Context;
 using System.Linq.Expressions;
+using PropertyInventorySystem.Entities;
 
 namespace PropertyInventorySystem.Infrastructure.Repos
 {
@@ -15,7 +16,49 @@ namespace PropertyInventorySystem.Infrastructure.Repos
 
         public async Task<TEntity> Get(Expression<Func<TEntity, bool>> filter = null)
         {
-            return await _context.Set<TEntity>().FirstOrDefaultAsync(filter);
+            return await _context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(filter);
+        }
+        
+        public async Task<TEntity> GetByIdWithIncludes(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includeProperties)
+        {
+            IQueryable<TEntity> query = _context.Set<TEntity>();
+
+            // Apply the Include methods dynamically
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            return await query.AsNoTracking().FirstOrDefaultAsync(filter);
+        }
+        
+        public async Task<PagedResult<TEntity>> GetAllWithIncludesAndPaging(int pageNumber, int pageSize, params Expression<Func<TEntity, object>>[] includeProperties)
+        {
+            IQueryable<TEntity> query = _context.Set<TEntity>();
+
+            // Apply the Include methods dynamically
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            // Get total count of records for paging
+            var totalRecords = await query.CountAsync();
+
+            // Apply pagination (Skip and Take)
+            var items = await query.Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            // Return the paged result
+            return new PagedResult<TEntity>
+            {
+                Items = items,
+                TotalCount = totalRecords,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalPages = (int)Math.Ceiling(totalRecords / (double)pageSize)
+            };
         }
 
         public async Task<List<TEntity>> GetList(Expression<Func<TEntity, bool>> filter = null)

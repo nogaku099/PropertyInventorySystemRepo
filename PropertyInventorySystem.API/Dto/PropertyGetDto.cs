@@ -13,8 +13,8 @@ namespace PropertyInventorySystem.API.Dto
         public string EmailAddress { get; set; }
         //Default Currency To Euro
 
-        public ICollection<PropertyPriceAuditDto>? PropertyPriceAudit { get; set; }
+        public List<PropertyPriceAuditDto>? PropertyPriceAudit { get; set; }
 
-        public ICollection<ContactPropertyGetDto>? ContactProperties { get; set; }
+        public List<ContactPropertyGetDto>? ContactProperties { get; set; }
     }
 }

@@ -16,6 +16,8 @@ builder.Services.AddDbContext<PropertyInventoryDbContext>(option => option.UseSq
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 builder.Services.AddScoped<IPropertyRepo, PropertyRepo>();
+//builder.Services.AddScoped<IPropertyPriceAuditRepo, PropertyPriceAuditRepo>();
+
 builder.Services.AddScoped<IContactRepo, ContactRepo>();
 builder.Services.AddScoped<IPropertyService, PropertyService>();
 
