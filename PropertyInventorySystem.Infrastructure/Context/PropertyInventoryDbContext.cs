@@ -15,5 +15,25 @@ namespace PropertyInventorySystem.Infrastructure.Context
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<PropertyPriceAudit> PropertyPriceAudits { get; set; }
         public DbSet<ContactProperty> ContactProperty { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Property>()
+                .Property(b => b.Id)
+                .HasDefaultValueSql("NEWID()");
+        
+            modelBuilder.Entity<ContactProperty>()
+                .Property(b => b.Id)
+                .HasDefaultValueSql("NEWID()");
+            
+            modelBuilder.Entity<Contact>()
+                .Property(b => b.Id)
+                .HasDefaultValueSql("NEWID()");
+            
+            modelBuilder.Entity<PropertyPriceAudit>()
+                .Property(b => b.Id)
+                .HasDefaultValueSql("NEWID()");
+        
+        }
     }
 }

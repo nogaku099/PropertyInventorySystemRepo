@@ -6,5 +6,6 @@ namespace PropertyInventorySystem.API.Services
     {
         Task<List<PropertyGetDto>> GetAllProperties();
         Task<PropertyGetDto> GetPropertyById(Guid id);
+        Task<Guid> CreatePropertyAsync(PropertyCreateDto propertyCreateDto);
     }
 }

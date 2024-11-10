@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PropertyInventorySystem.API.Mapper;
+using PropertyInventorySystem.API.Services;
 using PropertyInventorySystem.Infrastructure.Context;
 using PropertyInventorySystem.Infrastructure.Repos;
 
@@ -16,6 +17,7 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 builder.Services.AddScoped<IPropertyRepo, PropertyRepo>();
 builder.Services.AddScoped<IContactRepo, ContactRepo>();
+builder.Services.AddScoped<IPropertyService, PropertyService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

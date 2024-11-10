@@ -10,6 +10,7 @@ namespace PropertyInventorySystem.API.Mapper
         public AutoMapperProfiles()
         {
             CreateMap<Property, PropertyGetDto>().ReverseMap();
+            CreateMap<Property, PropertyCreateDto>().ReverseMap();
         }
     }
 }

@@ -10,6 +10,6 @@ namespace PropertyInventorySystem.Entities
         [EmailAddress]
         public string? EmailAddress { get; set; }
 
-        public virtual ICollection<ContactProperty> ContactProperties { get; set; }
+        public virtual ICollection<ContactProperty>? ContactProperties { get; set; }
     }
 }

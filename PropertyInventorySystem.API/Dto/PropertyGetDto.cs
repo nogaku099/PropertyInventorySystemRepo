@@ -15,6 +15,6 @@ namespace PropertyInventorySystem.API.Dto
 
         public ICollection<PropertyPriceAuditDto>? PropertyPriceAudit { get; set; }
 
-        public ICollection<ContactPropertyGetDto> ContactProperties { get; set; }
+        public ICollection<ContactPropertyGetDto>? ContactProperties { get; set; }
     }
 }

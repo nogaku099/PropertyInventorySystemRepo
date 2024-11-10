@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PropertyInventorySystem.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using PropertyInventorySystem.Infrastructure.Context;
 namespace PropertyInventorySystem.Infrastructure.Migrations
 {
     [DbContext(typeof(PropertyInventoryDbContext))]
-    partial class PropertyInventoryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241110104929_updateAllowNullPropertyAndContact")]
+    partial class updateAllowNullPropertyAndContact
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,8 +29,7 @@ namespace PropertyInventorySystem.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWID()");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");
@@ -59,8 +61,7 @@ namespace PropertyInventorySystem.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWID()");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ContactId")
                         .HasColumnType("uniqueidentifier");
@@ -102,8 +103,7 @@ namespace PropertyInventorySystem.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWID()");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -138,8 +138,7 @@ namespace PropertyInventorySystem.Infrastructure.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWID()");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDateTime")
                         .HasColumnType("datetime2");

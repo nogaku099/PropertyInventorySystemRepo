@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PropertyInventorySystem.Infrastructure.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PropertyInventorySystem.Infrastructure.Repos
 {
@@ -15,7 +10,7 @@ namespace PropertyInventorySystem.Infrastructure.Repos
 
         public BaseRepo(PropertyInventoryDbContext context)
         {
-            context = _context;
+            _context = context;
         }
 
         public async Task<TEntity> Get(Expression<Func<TEntity, bool>> filter = null)
@@ -30,7 +25,7 @@ namespace PropertyInventorySystem.Infrastructure.Repos
 
         public async Task<TEntity> Add(TEntity entity)
         {
-            await _context.AddAsync(entity);
+            await _context.AddAsync(entity);    
             await _context.SaveChangesAsync();
             return entity;
         }
