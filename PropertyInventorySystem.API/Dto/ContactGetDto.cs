@@ -11,6 +11,6 @@ namespace PropertyInventorySystem.API.Dto
         [EmailAddress]
         public string? EmailAddress { get; set; }
 
-        public ICollection<ContactPropertyGetDto> ContactProperties { get; set; }
+        public List<ContactPropertyGetDto> ContactProperties { get; set; }
     }
 }

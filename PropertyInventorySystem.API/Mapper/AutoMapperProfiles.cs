@@ -14,6 +14,12 @@ namespace PropertyInventorySystem.API.Mapper
             CreateMap<Property, PropertyUpdateDto>().ReverseMap();
             CreateMap<PropertyPriceAudit, PropertyPriceAuditDto>().ReverseMap();
             CreateMap<PagedResult<Property>, PagedResult<PropertyGetDto>>().ReverseMap();
+            
+            CreateMap<Contact, ContactGetDto>().ReverseMap();
+            CreateMap<Contact, ContactCreateDto>().ReverseMap();
+            CreateMap<Contact, ContactUpdateDto>().ReverseMap();
+            //CreateMap<PropertyPriceAudit, PropertyPriceAuditDto>().ReverseMap();
+            CreateMap<PagedResult<Contact>, PagedResult<ContactGetDto>>().ReverseMap();
 
         }
     }
