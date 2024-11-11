@@ -20,6 +20,7 @@ builder.Services.AddScoped<IPropertyRepo, PropertyRepo>();
 
 builder.Services.AddScoped<IContactRepo, ContactRepo>();
 builder.Services.AddScoped<IPropertyService, PropertyService>();
+builder.Services.AddScoped<IContactService, ContactService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

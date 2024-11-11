@@ -33,7 +33,18 @@ namespace PropertyInventorySystem.Infrastructure.Context
             modelBuilder.Entity<PropertyPriceAudit>()
                 .Property(b => b.Id)
                 .HasDefaultValueSql("NEWID()");
-        
+            
+            modelBuilder.Entity<Property>()
+                .HasMany(x => x.Contacts)
+                .WithMany(x => x.Properties)
+                .UsingEntity<ContactProperty>(
+                    j => j.HasOne(cp => cp.Contact)
+                        .WithMany(c => c.ContactsProperties)
+                        .HasForeignKey(cp => cp.ContactsId),
+                    j => j.HasOne(cp => cp.Property)
+                        .WithMany(p => p.ContactsProperties)
+                        .HasForeignKey(cp => cp.PropertiesId)
+                );
         }
     }
 }

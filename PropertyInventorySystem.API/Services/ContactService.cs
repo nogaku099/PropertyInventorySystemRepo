@@ -11,11 +11,13 @@ namespace PropertyInventorySystem.API.Services
         private IContactRepo _repo;
         //private IContactPriceAuditRepo _priceAuditRepo;
         private IMapper _mapper;
+        private IPropertyRepo _repoProp;
 
-        public ContactService(IContactRepo repo, IMapper mapper)
+        public ContactService(IContactRepo repo, IMapper mapper, IPropertyRepo repoProp)
         {
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _repoProp = repoProp ?? throw new ArgumentNullException(nameof(repoProp));
             //_priceAuditRepo = priceAuditRepo ?? throw new ArgumentNullException(nameof(priceAuditRepo));
         }
         
@@ -34,10 +36,25 @@ namespace PropertyInventorySystem.API.Services
             
             return _mapper.Map<List<ContactGetDto>>(result);
         }
+        
+        public async Task<ContactGetDto> CreateContactPropertyAsync(Guid id, ContactPropertyCreateDto contactUpdateDto)
+        {
+            var contactProperty = _mapper.Map<ContactProperty>(contactUpdateDto);
+            await _repo.AddContactToPropertyAsync(contactUpdateDto.PropertyId, id, contactProperty);
+            
+            
+            var result = await _repo.GetByIdWithIncludes(p => p.Id == id, p => p.Properties, p => p.ContactsProperties);
+            var x = _mapper.Map<ContactGetDto>(result);
+            return _mapper.Map<ContactGetDto>(result);
+        }
+
+        
+        
 
         public async Task<ContactGetDto> UpdateContactAsync(Guid id, ContactUpdateDto contactUpdateDto)
         {
-            var contact = await _repo.GetByIdWithIncludes(p => p.Id == id);
+            var contact = await _repo.GetByIdWithIncludes(p => p.Id == id, 
+                p => p.ContactsProperties);
             if (contact is null) throw new NullReferenceException("Contact not found");
             var updateContact = _mapper.Map<Contact>(contactUpdateDto);
             updateContact.Id = contact.Id;

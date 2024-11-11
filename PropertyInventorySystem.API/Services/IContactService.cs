@@ -11,5 +11,6 @@ namespace PropertyInventorySystem.API.Services
         Task<List<ContactGetDto>> BatchCreateContactAsync(List<ContactCreateDto> contactCreateDtos);
         Task<ContactGetDto> UpdateContactAsync(Guid id, ContactUpdateDto ContactUpdateDto);
         Task DeleteContact(Guid id);
+        Task<ContactGetDto> CreateContactPropertyAsync(Guid id, ContactPropertyCreateDto contactCreateDto);
     }
 }

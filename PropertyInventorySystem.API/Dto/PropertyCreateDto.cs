@@ -10,6 +10,6 @@ public class PropertyCreateDto
     public double Price { get; set; }
     [EmailAddress]
     public string EmailAddress { get; set; }
-    public DateTime CreatedDateTime { get; set; } = DateTime.Now;
-    public DateTime LastModifiedDateTime { get; set; } = DateTime.Now;
+    public DateTime CreatedDateTime { get; set; } = DateTime.UtcNow;
+    public DateTime LastModifiedDateTime { get; set; } = DateTime.UtcNow;
 }

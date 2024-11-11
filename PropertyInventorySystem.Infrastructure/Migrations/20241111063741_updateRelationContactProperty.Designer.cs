@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PropertyInventorySystem.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using PropertyInventorySystem.Infrastructure.Context;
 namespace PropertyInventorySystem.Infrastructure.Migrations
 {
     [DbContext(typeof(PropertyInventoryDbContext))]
-    partial class PropertyInventoryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241111063741_updateRelationContactProperty")]
+    partial class updateRelationContactProperty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

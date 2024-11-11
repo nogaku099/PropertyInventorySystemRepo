@@ -14,7 +14,8 @@ namespace PropertyInventorySystem.Entities
 
         public virtual ICollection<PropertyPriceAudit>? PropertyPriceAudit { get; set; }
 
-        public virtual ICollection<ContactProperty>? ContactProperties { get; set; }
+        public virtual ICollection<Contact>? Contacts { get; set; }
+        public virtual ICollection<ContactProperty>? ContactsProperties { get; set; }
 
     }
 }

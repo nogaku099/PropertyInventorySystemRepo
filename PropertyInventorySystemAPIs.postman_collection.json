@@ -1,0 +1,311 @@
+{
+	"info": {
+		"_postman_id": "0b3b3562-2043-4cdd-a822-f7385ea76776",
+		"name": "PropertyInventorySystemAPIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26950218"
+	},
+	"item": [
+		{
+			"name": "Property",
+			"item": [
+				{
+					"name": "GetAllProperty",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7022/api/Property?pageSize=-1&pageNum=1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7022",
+							"path": [
+								"api",
+								"Property"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "-1"
+								},
+								{
+									"key": "pageNum",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePropertyById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7022/api/Property/19ba80fd-d82f-4bb1-a001-1af7626d58ed",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7022",
+							"path": [
+								"api",
+								"Property",
+								"19ba80fd-d82f-4bb1-a001-1af7626d58ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPropertyById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7022/api/Property/19ba80fd-d82f-4bb1-a001-1af7626d58ed",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7022",
+							"path": [
+								"api",
+								"Property",
+								"19ba80fd-d82f-4bb1-a001-1af7626d58ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateProperty",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"string1234\",\r\n  \"address\": \"string123\",\r\n  \"dateOfRegistration\": \"2024-11-10T15:43:42.827Z\",\r\n  \"price\": 12312312302,\r\n  \"emailAddress\": \"user123@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7022/api/Property/19ba80fd-d82f-4bb1-a001-1af7626d58ed",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7022",
+							"path": [
+								"api",
+								"Property",
+								"19ba80fd-d82f-4bb1-a001-1af7626d58ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateProperty",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"string\",\r\n  \"address\": \"string\",\r\n  \"dateOfRegistration\": \"2024-11-11T07:09:10.729Z\",\r\n  \"price\": 11111110,\r\n  \"emailAddress\": \"user@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7022/api/Property",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7022",
+							"path": [
+								"api",
+								"Property"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contact",
+			"item": [
+				{
+					"name": "DeleteContactById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7022/api/Contact/19ba80fd-d82f-4bb1-a001-1af7626d58ed",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7022",
+							"path": [
+								"api",
+								"Contact",
+								"19ba80fd-d82f-4bb1-a001-1af7626d58ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetContactById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7022/api/Contact/19ba80fd-d82f-4bb1-a001-1af7626d58ed",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7022",
+							"path": [
+								"api",
+								"Contact",
+								"19ba80fd-d82f-4bb1-a001-1af7626d58ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateContact",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Contact1FNAme\",\r\n    \"lastName\": \"Contact1LName\",\r\n    \"phoneNumber\": \"string\",\r\n    \"emailAddress\": \"user@example.com\",\r\n    \"contactProperties\": [],\r\n    \"id\": \"f6156b42-4ae8-4979-920d-63b031a88358\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7022/api/Contact/f6156b42-4ae8-4979-920d-63b031a88358",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7022",
+							"path": [
+								"api",
+								"Contact",
+								"f6156b42-4ae8-4979-920d-63b031a88358"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllContact",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7022/api/Contact?pageSize=-1&pageNum=1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7022",
+							"path": [
+								"api",
+								"Contact"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "-1"
+								},
+								{
+									"key": "pageNum",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateContact",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\",\r\n  \"phoneNumber\": \"string\",\r\n  \"emailAddress\": \"user@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7022/api/Contact",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7022",
+							"path": [
+								"api",
+								"Contact"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateContactProperty",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\",\r\n  \"phoneNumber\": \"string\",\r\n  \"emailAddress\": \"user@example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7022/api/Contact",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7022",
+							"path": [
+								"api",
+								"Contact"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -5,5 +5,6 @@ namespace PropertyInventorySystem.Infrastructure.Repos
 {
     public interface IContactRepo : IBaseRepo<Contact>
     {
+        Task AddContactToPropertyAsync(Guid propertyId, Guid contactId, ContactProperty contactPropertyCreate);
     }
 }
