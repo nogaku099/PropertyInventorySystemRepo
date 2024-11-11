@@ -39,7 +39,15 @@ namespace PropertyInventorySystem.API.Services
         
         public async Task<ContactGetDto> CreateContactPropertyAsync(Guid id, ContactPropertyCreateDto contactUpdateDto)
         {
-            var contactProperty = _mapper.Map<ContactProperty>(contactUpdateDto);
+            var contactProperty = new ContactProperty()
+            {
+                EffectiveFrom = contactUpdateDto.EffectiveFrom,
+                EffectiveTill = contactUpdateDto.EffectiveTill,
+                CreatedDateTime = DateTime.UtcNow,
+                LastModifiedDateTime = DateTime.UtcNow,
+                PriceOfAcquisition = contactUpdateDto.PriceOfAcquisition
+            };
+            
             await _repo.AddContactToPropertyAsync(contactUpdateDto.PropertyId, id, contactProperty);
             
             var result = await _repo.GetByIdWithIncludes(p => p.Id == id, p => p.Properties, p => p.ContactsProperties);
