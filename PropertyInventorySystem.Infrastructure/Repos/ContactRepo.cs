@@ -35,9 +35,7 @@ namespace PropertyInventorySystem.Infrastructure.Repos
                 return; // The link already exists, no need to add
             contactPropertyCreate.ContactsId = contactId;
             contactPropertyCreate.PropertiesId = propertyId;
-            // contactPropertyCreate.Property = property;
-            // contactPropertyCreate.Contact = contact;
-           
+            
             await _context.Set<ContactProperty>().AddAsync(contactPropertyCreate);
             await _context.SaveChangesAsync();
         }

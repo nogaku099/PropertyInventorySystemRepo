@@ -42,10 +42,10 @@ namespace PropertyInventorySystem.API.Services
             var contactProperty = _mapper.Map<ContactProperty>(contactUpdateDto);
             await _repo.AddContactToPropertyAsync(contactUpdateDto.PropertyId, id, contactProperty);
             
-            
             var result = await _repo.GetByIdWithIncludes(p => p.Id == id, p => p.Properties, p => p.ContactsProperties);
-            var x = _mapper.Map<ContactGetDto>(result);
-            return _mapper.Map<ContactGetDto>(result);
+            var resultDto = _mapper.Map<ContactGetDto>(result);
+            resultDto.ContactProperties = _mapper.Map<List<ContactPropertyGetDto>>(result.ContactsProperties);
+            return resultDto;
         }
 
         
