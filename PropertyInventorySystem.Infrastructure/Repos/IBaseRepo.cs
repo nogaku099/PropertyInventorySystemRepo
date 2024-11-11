@@ -23,5 +23,7 @@ namespace PropertyInventorySystem.Infrastructure.Repos
         Task<int> Delete(T entity);
         Task<List<T>> AddRange(List<T> entity);
         Task<List<T>> UpdateRange(List<T> entity);
+
+        Task<T> GetE(Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includeProperties);
     }
 }

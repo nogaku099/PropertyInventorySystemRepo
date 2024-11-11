@@ -65,8 +65,9 @@ namespace PropertyInventorySystem.API.Controllers
 
         // DELETE api/<PropertyController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task Delete(Guid id)
         {
+            await _propertyService.DeleteProperty(id);
         }
     }
 }

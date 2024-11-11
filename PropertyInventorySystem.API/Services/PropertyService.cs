@@ -73,7 +73,22 @@ namespace PropertyInventorySystem.API.Services
         {
             var property = await _repo.GetByIdWithIncludes(p => p.Id == id, p => p.PropertyPriceAudit);
             
+            if (property is null) throw new NullReferenceException("Property not found");
+            
             return _mapper.Map<PropertyGetDto>(property);
+        }
+        
+        public async Task DeleteProperty(Guid id)
+        {
+            var property = await _repo.GetE(p => p.Id == id, p => p.PropertyPriceAudit);
+            
+            if (property is null) throw new NullReferenceException("Property not found");
+
+            var result = await _repo.Delete(property);
+            
+            if(result <= 0)
+                throw new Exception("Property could not be deleted");
+
         }
     }
 }

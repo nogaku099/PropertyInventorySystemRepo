@@ -10,5 +10,6 @@ namespace PropertyInventorySystem.API.Services
         Task<Guid> CreatePropertyAsync(PropertyCreateDto propertyCreateDto);
         Task<List<PropertyGetDto>> BatchCreatePropertyAsync(List<PropertyCreateDto> propertyCreateDtos);
         Task<PropertyGetDto> UpdatePropertyAsync(Guid id, PropertyUpdateDto propertyUpdateDto);
+        Task DeleteProperty(Guid id);
     }
 }

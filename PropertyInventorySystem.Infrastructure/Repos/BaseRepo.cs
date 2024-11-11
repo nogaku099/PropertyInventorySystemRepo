@@ -19,6 +19,19 @@ namespace PropertyInventorySystem.Infrastructure.Repos
             return await _context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(filter);
         }
         
+        public async Task<TEntity> GetE(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includeProperties)
+        {
+            IQueryable<TEntity> query = _context.Set<TEntity>();
+
+            // Apply the Include methods dynamically
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            return await query.FirstOrDefaultAsync(filter);
+        }
+        
         public async Task<TEntity> GetByIdWithIncludes(Expression<Func<TEntity, bool>> filter = null, params Expression<Func<TEntity, object>>[] includeProperties)
         {
             IQueryable<TEntity> query = _context.Set<TEntity>();
