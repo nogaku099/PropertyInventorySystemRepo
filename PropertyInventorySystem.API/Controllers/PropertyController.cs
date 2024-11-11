@@ -20,8 +20,13 @@ namespace PropertyInventorySystem.API.Controllers
         
         // GET: api/<PropertyController>
         [HttpGet]
-        public async Task<PagedResult<PropertyGetDto>> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        public async Task<PagedResult<PropertyGetDto>> GetAll([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = -1)
         {
+            if (pageNumber < 1)
+                throw new ArgumentException($"{nameof(pageNumber)} should be greater than 0");
+            if (pageSize <= 0 && pageSize != -1)
+                throw new ArgumentException($"{nameof(pageSize)} should be greater than 0");
+            
             var result = await _propertyService.GetAllProperties(pageNumber, pageSize);
             return result;
         }

@@ -45,6 +45,19 @@ namespace PropertyInventorySystem.Infrastructure.Repos
             // Get total count of records for paging
             var totalRecords = await query.CountAsync();
 
+            if (pageNumber == 1 && pageSize == -1)
+            {
+                var lstItem = await query.AsNoTracking().ToListAsync();
+                return new PagedResult<TEntity>
+                {
+                    Items = lstItem,
+                    TotalCount = totalRecords,
+                    PageNumber = 1,
+                    PageSize = totalRecords,
+                    TotalPages = 1
+                };
+            }
+
             // Apply pagination (Skip and Take)
             var items = await query.Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)

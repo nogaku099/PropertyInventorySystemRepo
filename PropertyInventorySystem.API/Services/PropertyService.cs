@@ -21,12 +21,6 @@ namespace PropertyInventorySystem.API.Services
         public async Task<Guid> CreatePropertyAsync(PropertyCreateDto propertyCreateDto)
         {
             var property = _mapper.Map<Property>(propertyCreateDto);
-            //property.Id = Guid.NewGuid();
-            //property.PropertyPriceAudit = new List<PropertyPriceAudit>();
-            // if (property.ContactProperties is not null)
-            //     property.ContactProperties = _mapper.Map<List<ContactProperty>>(propertyCreateDto.)
-            //property.ContactProperties = new List<ContactProperty>();
-
             var result = await _repo.Add(property);
             
             return result.Id;
@@ -35,12 +29,6 @@ namespace PropertyInventorySystem.API.Services
         public async Task<List<PropertyGetDto>> BatchCreatePropertyAsync(List<PropertyCreateDto> propertyCreateDtos)
         {
             var properties = _mapper.Map<List<Property>>(propertyCreateDtos);
-            //property.Id = Guid.NewGuid();
-            //property.PropertyPriceAudit = new List<PropertyPriceAudit>();
-            // if (property.ContactProperties is not null)
-            //     property.ContactProperties = _mapper.Map<List<ContactProperty>>(propertyCreateDto.)
-            //property.ContactProperties = new List<ContactProperty>();
-
             var result = await _repo.AddRange(properties);
             
             return _mapper.Map<List<PropertyGetDto>>(result);
@@ -69,7 +57,6 @@ namespace PropertyInventorySystem.API.Services
                 //await _priceAuditRepo.Add(priceAudit);
             }
 
-            //updateProperty.Id = property.Id;
             var result = await _repo.Update(updateProperty);
             var x = _mapper.Map<PropertyGetDto>(result);
             return _mapper.Map<PropertyGetDto>(result);
