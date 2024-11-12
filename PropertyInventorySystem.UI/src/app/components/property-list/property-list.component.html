@@ -20,25 +20,51 @@
     </div> -->
     <div class="col-md-6">
       <h4>Property List</h4>
-      <ul class="list-group">
+      <!-- <ul class="list-group">
         <li
           class="list-group-item"
           *ngFor="let property of properties; let i = index"
           [class.active]="i == currentIndex"
           (click)="setActiveProperty(property, i)"
         >
-          <!-- {{ property.id }} -->
-          {{ property.name }}
-          {{ property.address }}
-          {{ property.emailAddress }}
-          {{ property.dateOfRegistration }}
-          {{ property.price }}
+          {{ property.id }}
         </li>
       </ul>
-  
-      <button class="m-3 btn btn-sm btn-danger" (click)="removeAllProperties()">
+    -->
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Id</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let property of properties; let i = index"
+            [class.active]="i === currentIndex"
+            (click)="setActiveProperty(property, i)"
+          >
+            <td>{{ (pageNumber - 1) * pageSize + i + 1 }}</td> <!-- Adjusted for pagination -->
+            <td>{{ property.id }}</td>
+          </tr>
+        </tbody>
+      </table>
+    
+      <!-- <button class="m-3 btn btn-sm btn-danger" (click)="removeAllProperties()">
         Remove All
-      </button>
+      </button> -->
+      <nav>
+        <ul class="pagination">
+          <li class="page-item" [class.disabled]="pageNumber === 1">
+            <a class="page-link" (click)="onPageChange(pageNumber - 1)">Previous</a>
+          </li>
+          <li class="page-item" [class.disabled]="pageNumber === Math.ceil(totalItems / pageSize)">
+            <a class="page-link" (click)="onPageChange(pageNumber + 1)">Next</a>
+          </li>
+        </ul>
+      </nav>
+    
+      <p>Showing page {{ pageNumber }} of {{ Math.ceil(totalItems / pageSize) }}</p>
     </div>
     <div class="col-md-6">
       <app-property-details

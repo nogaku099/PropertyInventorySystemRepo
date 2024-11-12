@@ -1,6 +1,6 @@
 <div *ngIf="viewMode; else editable">
   <div *ngIf="currentProperty.id">
-    <h4>Tutorial</h4>
+    <h4>Property</h4>
     <!-- <div>
       <label><strong>ID:</strong></label> {{ currentProperty.id }}
     </div> -->
@@ -118,7 +118,7 @@
       Publish
     </button>
 
-    <button class="badge badge-danger mr-2" (click)="deleteTutorial()">
+    <button class="badge badge-danger mr-2" (click)="deleteProperty()">
       Delete
     </button> -->
 
@@ -134,6 +134,6 @@
 
   <div *ngIf="!currentProperty.id">
     <br />
-    <p>Cannot access this Tutorial...</p>
+    <p>Cannot access this Property...</p>
   </div>
 </ng-template>

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Property } from '../../models/property.model';
+import { Property, PaginatedProperties } from '../../models/property.model';
 import { PropertyService } from '../../services/property.service';
 
 @Component({
@@ -7,12 +7,11 @@ import { PropertyService } from '../../services/property.service';
   templateUrl: './property-list.component.html',
   styleUrl: './property-list.component.css'
 })
-export class PropertyListComponent {
 
+export class PropertyListComponent {
   properties?: Property[];
-  //currentProperty: Property = {};
   currentIndex = -1;
-  title = '';
+  // title = '';
 
   @Input() viewMode = false;
 
@@ -24,6 +23,10 @@ export class PropertyListComponent {
     dateOfRegistration: '', 
     price: 0
   };
+  Math = Math;
+  pageNumber = 1;
+  pageSize = 5;
+  totalItems = 0;
 
   constructor(private propertyService: PropertyService) { }
 
@@ -33,11 +36,13 @@ export class PropertyListComponent {
 
   retrievePropeties(): void {
     this.propertyService
-    .getAll()
+    .getAll(this.pageNumber, this.pageSize)
       .subscribe({
-        next: (data) => {
-          this.properties = data;
-          console.log(data);
+        next: (response: PaginatedProperties) => {
+          //this.pagingResponse = data;
+          this.properties = response.items;
+          this.totalItems = response.totalCount
+          console.log(response);
         },
         error: (e) => console.error(e)
       });
@@ -63,6 +68,11 @@ export class PropertyListComponent {
         },
         error: (e) => console.error(e)
       });
+  }
+
+  onPageChange(newPage: number): void {
+    this.pageNumber = newPage;
+    this.retrievePropeties();
   }
 
   // searchTitle(): void {

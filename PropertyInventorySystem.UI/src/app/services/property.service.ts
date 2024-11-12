@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Property } from '../models/property.model';
+import { Property, PaginatedProperties } from '../models/property.model';
 
 const baseUrl = 'https://localhost:7022/api/Property';
 @Injectable({
@@ -11,8 +11,14 @@ export class PropertyService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Property[]> {
-    return this.http.get<Property[]>(baseUrl);
+  getAll(pageNumber: number = 1, pageSize: number = 5): Observable<PaginatedProperties> {
+    const params = new HttpParams()
+      .set('pageNumber', pageNumber.toString())
+      .set('pageSize', pageSize.toString());
+      return this.http.get<PaginatedProperties>(`${baseUrl}`, { 
+        params,
+        responseType: 'json'  // Explicitly set responseType to JSON
+      });
   }
 
   get(id: any): Observable<Property> {
