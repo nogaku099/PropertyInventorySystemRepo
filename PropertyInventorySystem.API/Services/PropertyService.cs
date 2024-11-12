@@ -64,18 +64,68 @@ namespace PropertyInventorySystem.API.Services
 
         public async Task<PagedResult<PropertyGetDto>> GetAllProperties(int pageNum, int pageSize)
         {
-            var properties = await _repo.GetAllWithIncludesAndPaging(pageNum, pageSize, p => p.PropertyPriceAudit);
-            var result = _mapper.Map<PagedResult<PropertyGetDto>>(properties);
+            var properties = await _repo.GetAllWithIncludesAndPaging(pageNum, pageSize, 
+                p => p.PropertyPriceAudit, p => p.Contacts, p => p.ContactsProperties);
+            var lstProp = properties.Items;
+            var propertyDtos = lstProp.Select(x => new PropertyGetDto()
+            {
+                Id = x.Id,
+                CreatedDateTime = x.CreatedDateTime,
+                LastModifiedDateTime = x.LastModifiedDateTime,
+                PropertyPriceAudit = _mapper.Map<List<PropertyPriceAuditDto>>(x.PropertyPriceAudit),
+                ContactProperties = _mapper.Map<List<ContactPropertyGetDto>>(x.ContactsProperties),
+                Price = x.Price,
+                Address = x.Address,
+                EmailAddress = x.EmailAddress,
+                Name = x.Name,
+                DateOfRegistration = x.DateOfRegistration
+            }).ToList();
+
+            foreach (var propertyDto in propertyDtos)
+            {
+                var contacts = lstProp.FirstOrDefault(p => p.Id == propertyDto.Id).Contacts.ToList();
+                foreach (var contactProperty in propertyDto.ContactProperties)
+                {
+                    var contact = contacts.FirstOrDefault(x => x.Id == contactProperty.ContactsId);
+                    contactProperty.FullName = contact.FirstName + " " + contact.LastName;
+                }
+            }
+
+            var result = new PagedResult<PropertyGetDto>()
+            {
+                Items = propertyDtos,
+                TotalCount = properties.TotalCount,
+                TotalPages = properties.TotalPages,
+                PageNumber = properties.PageNumber,
+                PageSize = properties.PageSize
+            };
+            
             return result;
         }
 
         public async Task<PropertyGetDto> GetPropertyById(Guid id)
         {
-            var property = await _repo.GetByIdWithIncludes(p => p.Id == id, p => p.PropertyPriceAudit);
+            var property = await _repo.GetByIdWithIncludes(p => p.Id == id, 
+                p => p.PropertyPriceAudit, 
+                p => p.Contacts,
+                p => p.ContactsProperties);
             
             if (property is null) throw new NullReferenceException("Property not found");
             
-            return _mapper.Map<PropertyGetDto>(property);
+            var propGetDto = _mapper.Map<PropertyGetDto>(property);
+            propGetDto.PropertyPriceAudit = _mapper.Map<List<PropertyPriceAuditDto>>(property.PropertyPriceAudit);
+            propGetDto.ContactProperties = _mapper.Map<List<ContactPropertyGetDto>>(property.ContactsProperties)
+                                                    .OrderByDescending(x => x.EffectiveFrom).ToList();
+            if (propGetDto.ContactProperties is not null)
+            {
+                foreach (var contactProperty in propGetDto.ContactProperties)
+                {
+                    var contact = property.Contacts.FirstOrDefault(x => x.Id == contactProperty.ContactsId);
+                    contactProperty.FullName = contact.FirstName + " " + contact.LastName;
+                }
+            }
+
+            return propGetDto;
         }
         
         public async Task DeleteProperty(Guid id)

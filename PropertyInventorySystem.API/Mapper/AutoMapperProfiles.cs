@@ -9,7 +9,10 @@ namespace PropertyInventorySystem.API.Mapper
     {
         public AutoMapperProfiles()
         {
-            CreateMap<Property, PropertyGetDto>().ReverseMap();
+            CreateMap<Property, PropertyGetDto>().ReverseMap()
+                .ForMember(dest => dest.PropertyPriceAudit, opt => opt.MapFrom(src => src.PropertyPriceAudit))
+                .ForMember(dest => dest.ContactsProperties, 
+                    opt => opt.MapFrom(c => c.ContactProperties.OrderByDescending(x => x.EffectiveFrom).ToList())).ReverseMap();
             CreateMap<Property, PropertyCreateDto>().ReverseMap();
             CreateMap<Property, PropertyUpdateDto>().ReverseMap();
             CreateMap<PropertyPriceAudit, PropertyPriceAuditDto>().ReverseMap();
@@ -23,8 +26,17 @@ namespace PropertyInventorySystem.API.Mapper
             
             //CreateMap<Contact, ContactPropertyCreateDto>().ReverseMap();
             CreateMap<ContactProperty, ContactPropertyCreateDto>().ReverseMap();
-            CreateMap<ContactProperty, ContactPropertyGetDto>().ReverseMap();
+            CreateMap<ContactPropertyGetDto, ContactProperty>();
+            
+            CreateMap<ContactProperty, ContactPropertyGetDto>()
+                .ForMember(dest => dest.FullName, 
+                    opt => opt.MapFrom(src => $"{src.Contact.FirstName} {src.Contact.LastName}"));
 
+            // Other mappings can go here
+            CreateMap<Property, PropertyGetDto>()
+                .ForMember(dest => dest.PropertyPriceAudit, opt => opt.MapFrom(src => src.PropertyPriceAudit))
+                .ForMember(dest => dest.ContactProperties, 
+                    opt => opt.MapFrom(src => src.ContactsProperties.OrderByDescending(x => x.EffectiveFrom).ToList()));
 
         }
     }
