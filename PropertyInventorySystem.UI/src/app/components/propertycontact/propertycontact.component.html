@@ -18,65 +18,55 @@
         </div>
       </div>
     </div> -->
-    <div class="col-md-6">
-      <h4>Property List</h4>
-      <!-- <ul class="list-group">
-        <li
-          class="list-group-item"
-          *ngFor="let property of properties; let i = index"
-          [class.active]="i == currentIndex"
-          (click)="setActiveProperty(property, i)"
-        >
-          {{ property.id }}
-        </li>
-      </ul>
-    -->
-    <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Id</th>
-            <th>Property Name</th>
-            <th>Asking Price</th>
-            <th>Owner</th>
-            <th>Date of Purchase</th>
-            <th>Sold At Price in EUR</th>
-            <th>Sold At Price in USD</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            *ngFor="let property of propertiesContacts; let i = index"
-            [class.active]="i === currentIndex"
-            (click)="setActiveProperty(property, i)"
-          >
-            <td>{{ (pageNumber - 1) * pageSize + i + 1 }}</td> <!-- Adjusted for pagination -->
-            <td>{{ property.id }}</td>
-            <td>{{ property.name }}</td>
-            <td>{{ property.askingPrice }}</td>
-            <td>{{ property.owner }}</td>
-            <td>{{ property.dateOfPurchase }}</td>
-            <td>{{ property.soldAtPriceEUR }}</td>
-            <td>{{ property.soldAtPriceUSD }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="col-md-12">
+        <h4>Property and Contact</h4>
+      
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>Id</th>
+                <th>Property Name</th>
+                <th>Asking Price</th>
+                <th>Owner</th>
+                <th>Date of Purchase</th>
+                <th>Sold At Price in EUR</th>
+                <th>Sold At Price in USD</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr
+                *ngFor="let property of propertiesContacts; let i = index"
+                [class.active]="i === currentIndex"
+                (click)="setActiveProperty(property, i)"
+            >
+                <td>{{ (pageNumber - 1) * pageSize + i + 1 }}</td> <!-- Adjusted for pagination -->
+                <td>{{ property.id }}</td>
+                <td>{{ property.name }}</td>
+                <td>{{ property.askingPrice }}</td>
+                <td>{{ property.owner }}</td>
+                <td>{{ property.dateOfPurchase }}</td>
+                <td>{{ property.soldAtPriceEUR }}</td>
+                <td>{{ property.soldAtPriceUSD }}</td>
+            </tr>
+            </tbody>
+        </table>
     
       <!-- <button class="m-3 btn btn-sm btn-danger" (click)="removeAllProperties()">
         Remove All
       </button> -->
-      <nav>
-        <ul class="pagination">
-          <li class="page-item" [class.disabled]="pageNumber === 1">
-            <a class="page-link" (click)="onPageChange(pageNumber - 1)">Previous</a>
-          </li>
-          <li class="page-item" [class.disabled]="pageNumber === Math.ceil(totalItems / pageSize)">
-            <a class="page-link" (click)="onPageChange(pageNumber + 1)">Next</a>
-          </li>
-        </ul>
-      </nav>
-    
-      <p>Showing page {{ pageNumber }} of {{ Math.ceil(totalItems / pageSize) }}</p>
+        <nav>
+            <ul class="pagination">
+            <li class="page-item" [class.disabled]="pageNumber === 1">
+                <a class="page-link" (click)="onPageChange(pageNumber - 1)">Previous</a>
+            </li>
+            <li class="page-item" [class.disabled]="pageNumber === Math.ceil(totalItems / pageSize)">
+                <a class="page-link" (click)="onPageChange(pageNumber + 1)">Next</a>
+            </li>
+            </ul>
+        </nav>
+        
+        <p>Showing page {{ pageNumber }} of {{ Math.ceil(totalItems / pageSize) }}</p>
     </div>
     
   </div>
