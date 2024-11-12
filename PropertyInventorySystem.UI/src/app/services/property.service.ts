@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Property } from '../models/property.model';
 
-const baseUrl = 'http://localhost:7022/api/property';
+const baseUrl = 'https://localhost:7022/api/Property';
 @Injectable({
   providedIn: 'root'
 })
