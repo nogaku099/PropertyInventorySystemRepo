@@ -9,7 +9,7 @@ import { PropertyListComponent } from './components/property-list/property-list.
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { PropertyContactComponent } from './components/propertycontact/propertycontact.component';
+import { PropertiesContactComponent } from './components/propertycontact/propertycontact.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { PropertyContactComponent } from './components/propertycontact/propertyc
     AddPropertyComponent,
     PropertyDetailsComponent,
     PropertyListComponent,
-    PropertyContactComponent
+    PropertiesContactComponent
   ],
   imports: [
     BrowserModule,
